@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter Variable', 'Segoe UI', system-ui, sans-serif;
+
+  /*
+   * Corporate blue palette (off-white / pale blue / medium blue / dark navy).
+   * The app's accent classes use the indigo & violet scales, so those tokens
+   * are remapped here — every bg-indigo-*, ring-, shadow- etc. follows.
+   */
+  --color-indigo-50: #f4f7fc;
+  --color-indigo-100: #d9e0ef; /* pale blue */
+  --color-indigo-200: #bccbe5;
+  --color-indigo-300: #8fa9d3;
+  --color-indigo-400: #6389bf;
+  --color-indigo-500: #4173b3; /* medium blue */
+  --color-indigo-600: #35619b;
+  --color-indigo-700: #2b4f80;
+  --color-indigo-800: #1f3a61;
+  --color-indigo-900: #152c4e;
+  --color-indigo-950: #0e1f38;
+
+  /* accent partner → dark navy */
+  --color-violet-500: #23406b;
+  --color-violet-600: #16294a; /* navy */
+  --color-violet-700: #0f1e37;
+
+  /* soft tint for light chips */
+  --color-amber-200: #d9e0ef;
+  --color-amber-300: #c3cfe7;
+}
+
+body {
+  @apply text-slate-800 antialiased;
+  background-color: #f4f6fa;
+}
+
+::selection {
+  background: rgb(65 115 179 / 0.25);
+}
+
+/* Slim, desktop-app style scrollbars */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgb(22 41 74 / 0.3);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(22 41 74 / 0.5);
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.animate-rise {
+  animation: rise 0.18s ease-out;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(24px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+.animate-slide-in {
+  animation: slide-in 0.2s ease-out;
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white;
+  }
+  .print-area {
+    position: absolute;
+    inset: 0;
+    padding: 0;
+    margin: 0;
+  }
+  @page {
+    size: A4;
+    margin: 10mm;
+  }
+  /* Portrait is narrower — compact the tables so wide reports still fit. */
+  .print-area table {
+    font-size: 9px;
+  }
+  .print-area th,
+  .print-area td {
+    padding: 3px 4px;
+  }
+}
